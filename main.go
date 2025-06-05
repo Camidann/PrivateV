@@ -12,5 +12,4 @@ func main() {
 	SetupRoutes(router)
 
 	router.Run(":8080")
-	// router.Run(":3000") for a hard coded port
 }

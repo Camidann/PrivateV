@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Subir Video</title>
+</head>
 <body>
-    <form method="POST" action="/upload"><button type="submit" class="btn btn-primary">Cargar Video</button></form>
+    <form method="POST" action="/upload/charge" enctype="multipart/form-data">
+        <input type="file" name="video" accept="video/mp4" required>
+        <input type="text" name="nombre" placeholder="Nombre del video (sin .mp4)" required>
+        <button type="submit" class="btn btn-primary">Cargar Video</button>
+    </form>
 </body>
+</html>

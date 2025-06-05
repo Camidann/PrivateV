@@ -2,37 +2,53 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
 	"net/http"
-	"time"
 
 	"github.com/gin-gonic/gin"
 )
 
-var SubirVideo = false
-var numeroAleatorio int // Declarar como variable global
-
-func init() {
-	rand.Seed(time.Now().UnixNano())
-	numeroAleatorio = rand.Intn(9999999)
-}
-
 func SetupRoutes(router *gin.Engine) {
-	router.GET("/", func(c *gin.Context) {
+	router.Static("/Videos", "./Videos")
+	router.LoadHTMLFiles("src/index.html", "src/upload.html", "src/video.html")
 
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
 
 	router.GET("/upload", func(c *gin.Context) {
-		// Obtener la URL de la solicitud actual
-		currentURL := c.Request.URL.String()
-		fmt.Println("URL actual:", currentURL)
+		c.HTML(http.StatusOK, "upload.html", gin.H{})
+	})
 
-		// Construir una nueva URL a partir de la actual y agregar numeroAleatorio
-		newURL := fmt.Sprintf("%s/%d", currentURL, numeroAleatorio)
-		fmt.Println("URL construida:", newURL)
+	router.POST("/upload/charge", func(c *gin.Context) {
+		file, err := c.FormFile("video")
+		if err != nil {
+			c.String(http.StatusBadRequest, "No se pudo obtener el archivo: %v", err)
+			return
+		}
+		nombre := c.PostForm("nombre")
+		if nombre == "" {
+			c.String(http.StatusBadRequest, "Debe ingresar un nombre para el video")
+			return
+		}
 
-		// Redirigir a la nueva URL
+		videoFileName := fmt.Sprintf("%s.mp4", nombre)
+		videoPath := fmt.Sprintf("Videos/%s", videoFileName)
+
+		if err := c.SaveUploadedFile(file, videoPath); err != nil {
+			c.String(http.StatusInternalServerError, "No se pudo guardar el archivo: %v", err)
+			return
+		}
+
+		newURL := fmt.Sprintf("/video/%s", videoFileName)
 		c.Redirect(http.StatusFound, newURL)
+	})
+
+	// Ruta para mostrar el video subido
+	router.GET("/video/:filename", func(c *gin.Context) {
+		filename := c.Param("filename")
+		c.HTML(http.StatusOK, "video.html", gin.H{
+			"video": "/Videos/" + filename,
+		})
 	})
 
 }

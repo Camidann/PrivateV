@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página de Visita</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 80px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 32px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            text-align: left;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Bienvenido!</h1>
+        <p>Esta es una página de visita sencilla creada con HTML.</p>
+        <a href="/upload">Ir a la carga de videos</a>
+        <h2>Videos recientes</h2>
+        <ul>
+            {{range .videos}}
+                <li><a href="/video/{{.}}">{{.}}</a></li>
+            {{else}}
+                <li>No hay videos subidos aún.</li>
+            {{end}}
+        </ul>
+    </div>
+</body>
+</html>
