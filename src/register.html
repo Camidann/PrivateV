@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrarse</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(120deg, #e0e7ff 0%, #f4f4f4 100%);
+            margin: 0;
+            min-height: 100vh;
+        }
+        .logo-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 36px auto 0 auto;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+        .logo-btn:hover {
+            transform: scale(1.07);
+        }
+        .logo-img {
+            width: 54px;
+            height: 54px;
+            margin-right: 12px;
+        }
+        .logo-text {
+            font-size: 2em;
+            font-weight: bold;
+            color: #1a237e;
+            letter-spacing: 1px;
+        }
+        .register-container {
+            max-width: 370px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            padding: 36px 32px 28px 32px;
+        }
+        h2 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 28px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        input[type="text"], input[type="password"] {
+            padding: 10px;
+            border: 1px solid #bfc8e6;
+            border-radius: 5px;
+            font-size: 1em;
+            background: #f7f9fc;
+            transition: border 0.2s;
+        }
+        input:focus {
+            border: 1.5px solid #007bff;
+            outline: none;
+        }
+        button {
+            padding: 12px;
+            background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.08em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px #007bff22;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #0056b3 60%, #007bff 100%);
+            box-shadow: 0 4px 16px #007bff33;
+        }
+        .back-link {
+            display: block;
+            margin: 22px auto 0 auto;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .back-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <button class="logo-btn" onclick="window.location.href='/sign-in'">
+        <svg class="logo-img" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="32" fill="#007bff"/>
+            <path d="M32 18a10 10 0 100 20 10 10 0 000-20zm0 24c-8.84 0-16 4.03-16 9v3h32v-3c0-4.97-7.16-9-16-9z" fill="#fff"/>
+        </svg>
+        <span class="logo-text">Crear Cuenta</span>
+    </button>
+    <div class="register-container">
+        <h2>Crear cuenta</h2>
+    <form method="POST" action="/galeriaVideos">
+    <input type="text" name="usuario" placeholder="Usuario" required>
+    <input type="password" name="password" placeholder="Contraseña" required>
+    <button type="submit">Registrarse</button>
+    </form>
+        <a class="back-link" href="/sign-in">¿Ya tienes cuenta? Inicia sesión</a>
+    </div>  
+</body>
+</html>

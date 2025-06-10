@@ -1,14 +1,16 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	//Crea el Gin router
+	initDB()
 	router := gin.Default()
-
-	// Importa las rutas desde el archivo routes.go
+	fmt.Println("EMPEZO LA CARGA DE LA PAGINA")
 	SetupRoutes(router)
 
 	router.Run(":8080")

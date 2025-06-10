@@ -3,12 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <title>Subir Video</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(120deg, #e0e7ff 0%, #f4f4f4 100%);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 420px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            padding: 36px 32px 28px 32px;
+            transition: box-shadow 0.2s;
+        }
+        .container:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+        }
+        h1 {
+            color: #2a2a2a;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.6em;
+            letter-spacing: 1px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        label {
+            font-weight: 500;
+            color: #444;
+            margin-bottom: 2px;
+        }
+        input[type="file"], input[type="text"], textarea {
+            padding: 11px;
+            border: 1px solid #bfc8e6;
+            border-radius: 5px;
+            font-size: 1em;
+            background: #f7f9fc;
+            transition: border 0.2s;
+        }
+        input[type="file"]:focus, input[type="text"]:focus, textarea:focus {
+            border: 1.5px solid #007bff;
+            outline: none;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+            max-height: 180px;
+        }
+        button {
+            padding: 13px;
+            background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.08em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px #007bff22;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #0056b3 60%, #007bff 100%);
+            box-shadow: 0 4px 16px #007bff33;
+        }
+        .back-link {
+            display: block;
+            margin: 22px auto 0 auto;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .back-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+        .logo-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 32px auto 0 auto;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+        .logo-btn:hover {
+            transform: scale(1.07);
+        }
+        .logo-img {
+            width: 54px;
+            height: 54px;
+            margin-right: 12px;
+        }
+        .logo-text {
+            font-size: 2em;
+            font-weight: bold;
+            color: #1a237e;
+            letter-spacing: 1px;
+        }
+            .logout-btn {
+        display: inline-block;
+        margin: 18px 0 0 0;
+        padding: 8px 22px;
+        background: #e53935;
+        color: #fff;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1em;
+        box-shadow: 0 1px 4px #e5393511;
+        transition: background 0.18s;
+    }
+    .logout-btn:hover {
+        background: #b71c1c;
+    }
+    </style>
 </head>
 <body>
-    <form method="POST" action="/upload/charge" enctype="multipart/form-data">
-        <input type="file" name="video" accept="video/mp4" required>
-        <input type="text" name="nombre" placeholder="Nombre del video (sin .mp4)" required>
-        <button type="submit" class="btn btn-primary">Cargar Video</button>
-    </form>
+    <button class="logo-btn" onclick="window.location.href='/sign-in'">
+        <svg class="logo-img" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="32" fill="#007bff"/>
+            <path d="M32 18a10 10 0 100 20 10 10 0 000-20zm0 24c-8.84 0-16 4.03-16 9v3h32v-3c0-4.97-7.16-9-16-9z" fill="#fff"/>
+        </svg>
+        <span class="logo-text">MiApp</span>
+    </button>
+    <div style="display:flex; justify-content:flex-end; max-width:420px; margin:0 auto; padding:0 8px;">
+    <a href="/logout" class="logout-btn">Cerrar sesión</a>
+    </div>
+    <div class="container">
+        <h1>Subir un nuevo video</h1>
+        <form method="POST" action="/upload/charge" enctype="multipart/form-data">
+            <label for="video">Archivo de video (.mp4):</label>
+            <input id="video" type="file" name="video" accept="video/mp4" required>
+
+            <label for="nombre">Título del video:</label>
+            <input id="nombre" type="text" name="nombre" placeholder="Título del video" required>
+            <button type="submit">Cargar Video</button>
+        </form>
+        <a class="back-link" href="/">← Volver al inicio</a>
+    </div>
 </body>
 </html>

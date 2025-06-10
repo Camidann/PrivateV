@@ -2,13 +2,67 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Reproductor de Video</title>
+    <title>{{.titulo}} - Reproductor de Video</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+            padding: 36px 32px 28px 32px;
+            text-align: center;
+        }
+        h1 {
+            color: #222;
+            margin-bottom: 8px;
+        }
+        .desc {
+            color: #666;
+            font-size: 1.08em;
+            margin: 18px 0 22px 0;
+        }
+        video {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            background: #222;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 18px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Reproductor de Video</h1>
-    <video controls width="600">
-        <source src="{{.video}}" type="video/mp4">
-        Tu navegador no soporta la reproducción de video.
-    </video>
+    <button class="logo-btn" onclick="window.location.href='/sign-in'">
+        <svg class="logo-img" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="32" fill="#007bff"/>
+            <path d="M32 18a10 10 0 100 20 10 10 0 000-20zm0 24c-8.84 0-16 4.03-16 9v3h32v-3c0-4.97-7.16-9-16-9z" fill="#fff"/>
+        </svg>
+        <span class="logo-text">MiApp</span>
+    </button>
+    <div class="container">
+        <h1>{{.titulo}}</h1>
+        <video controls>
+            <source src="{{.video}}" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+        </video>
+        <div class="desc">{{.descripcion}}</div>
+        <a class="back-link" href="/galeriaVideos">← Volver al inicio</a>
+    </div>
 </body>
 </html>

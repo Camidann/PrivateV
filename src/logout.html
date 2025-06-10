@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sesión cerrada</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(120deg, #e0e7ff 0%, #f4f4f4 100%);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logout-box {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px #007bff22;
+            padding: 36px 32px;
+            text-align: center;
+        }
+        .logout-title {
+            font-size: 1.4em;
+            color: #1a237e;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+        .logout-msg {
+            color: #444;
+            margin-bottom: 28px;
+        }
+        .back-btn {
+            padding: 10px 28px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.18s;
+        }
+        .back-btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-box">
+        <div class="logout-title">Sesión cerrada</div>
+        <div class="logout-msg">Has cerrado sesión correctamente.</div>
+        <button class="back-btn" onclick="window.location.href='/galeriaVideos'">Volver a la galería</button>
+    </div>
+</body>
+</html>
