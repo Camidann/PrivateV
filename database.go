@@ -19,7 +19,10 @@ func initDB() {
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     filename TEXT UNIQUE,
     titulo TEXT,
-    descripcion TEXT
+    descripcion TEXT,
+    contenido BLOB,
+    usuario_id INTEGER,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 )`)
 	if err != nil {
 		panic(err)
@@ -34,4 +37,9 @@ func initDB() {
 		panic(err)
 	}
 
+}
+func getUsuarioID(usuario string) (int, error) {
+	var id int
+	err := db.QueryRow("SELECT id FROM usuarios WHERE usuario = ?", usuario).Scan(&id)
+	return id, err
 }

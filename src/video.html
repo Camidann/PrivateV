@@ -1,68 +1,161 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>{{.titulo}} - Reproductor de Video</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        :root {
+            --bg: #f7fbff;
+            --surface: #ffffff;
+            --accent: #4f46e5;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
             margin: 0;
-            padding: 0;
+            min-height: 100vh;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            padding: 24px;
         }
-        .container {
-            max-width: 700px;
-            margin: 50px auto;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-            padding: 36px 32px 28px 32px;
-            text-align: center;
+
+        .page-shell {
+            width: min(100%, 860px);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
+
+        .video-card {
+            padding: 32px;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+            display: grid;
+            gap: 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .brand-mark {
+            width: 50px;
+            height: 50px;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--accent), #3b82f6);
+            color: white;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .brand-title {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
         h1 {
-            color: #222;
-            margin-bottom: 8px;
+            margin: 0;
+            font-size: clamp(1.9rem, 2.6vw, 2.4rem);
+            line-height: 1.05;
         }
+
         .desc {
-            color: #666;
-            font-size: 1.08em;
-            margin: 18px 0 22px 0;
+            margin: 0;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.75;
         }
-        video {
+
+        .video-player {
+            border-radius: 24px;
+            overflow: hidden;
+            background: #111827;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+        }
+
+        .video-player video {
+            display: block;
             width: 100%;
-            max-width: 600px;
-            border-radius: 8px;
-            margin-bottom: 18px;
-            background: #222;
+            height: auto;
+            min-height: 320px;
+            background: black;
         }
+
+        .actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
         .back-link {
-            display: inline-block;
-            margin-top: 18px;
-            color: #007bff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            border-radius: 999px;
+            background: white;
+            color: var(--accent);
+            border: 1px solid #d1d5db;
             text-decoration: none;
-            font-size: 1em;
+            font-weight: 700;
+            transition: transform 150ms ease, background 150ms ease;
         }
+
         .back-link:hover {
-            text-decoration: underline;
+            transform: translateY(-1px);
+            background: #f8fafc;
+        }
+
+        @media (max-width: 720px) {
+            .video-card {
+                padding: 24px;
+            }
+
+            .brand {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
 <body>
-    <button class="logo-btn" onclick="window.location.href='/sign-in'">
-        <svg class="logo-img" viewBox="0 0 64 64" fill="none">
-            <circle cx="32" cy="32" r="32" fill="#007bff"/>
-            <path d="M32 18a10 10 0 100 20 10 10 0 000-20zm0 24c-8.84 0-16 4.03-16 9v3h32v-3c0-4.97-7.16-9-16-9z" fill="#fff"/>
-        </svg>
-        <span class="logo-text">MiApp</span>
-    </button>
-    <div class="container">
-        <h1>{{.titulo}}</h1>
-        <video controls>
-            <source src="{{.video}}" type="video/mp4">
-            Tu navegador no soporta la reproducción de video.
-        </video>
-        <div class="desc">{{.descripcion}}</div>
-        <a class="back-link" href="/galeriaVideos">← Volver al inicio</a>
+    <div class="page-shell">
+        <div class="video-card">
+            <div class="brand">
+                <div class="brand-mark">V</div>
+                <div>
+                    <p class="brand-title">Reproductor de Video</p>
+                    <span class="desc">Disfruta de tu contenido con un diseño limpio y moderno.</span>
+                </div>
+            </div>
+
+            <h1>{{.titulo}}</h1>
+            <div class="video-player">
+                <video controls>
+                    <source src="{{.video}}" type="video/mp4">
+                    Tu navegador no soporta la reproducción de video.
+                </video>
+            </div>
+            <p class="desc">{{.descripcion}}</p>
+            <a class="back-link" href="/galeriaVideos">← Volver al inicio</a>
+        </div>
     </div>
 </body>
 </html>

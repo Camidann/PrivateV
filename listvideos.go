@@ -1,24 +1,27 @@
 package main
 
 import (
-	"os"
-	"strings"
+	"log"
 )
 
 // Esta es la carga de videos para subir a index y a videos
-// Se suben en upload y lo que hace es buscar en la carpeta Videos, el video y su nombre
-// entiendo el codigo? si
-// lo puedo leer? si (porfavor no me hagas sufrir mas)
+// Se suben en upload y lo que hace es buscar en la DB, el video y su nombre
 func listVideos() []string {
-	files, err := os.ReadDir("./Videos")
+	rows, err := db.Query("SELECT filename FROM videos")
 	if err != nil {
+		log.Println("Error querying videos:", err)
 		return []string{}
 	}
+	defer rows.Close()
+
 	var videos []string
-	for _, file := range files {
-		if !file.IsDir() && strings.HasSuffix(file.Name(), ".mp4") {
-			videos = append(videos, file.Name())
+	for rows.Next() {
+		var filename string
+		if err := rows.Scan(&filename); err != nil {
+			log.Println("Error scanning video:", err)
+			continue
 		}
+		videos = append(videos, filename)
 	}
 	return videos
 }

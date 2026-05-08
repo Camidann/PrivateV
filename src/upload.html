@@ -1,155 +1,194 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Subir Video</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        :root {
+            --bg: #eef4ff;
+            --surface: #ffffff;
+            --accent: #4f46e5;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #dbeafe;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(120deg, #e0e7ff 0%, #f4f4f4 100%);
             margin: 0;
-            padding: 0;
+            min-height: 100vh;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: radial-gradient(circle at top, rgba(79, 70, 229, 0.16), transparent 24%),
+                        linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            padding: 24px;
         }
-        .container {
-            max-width: 420px;
-            margin: 60px auto;
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-            padding: 36px 32px 28px 32px;
-            transition: box-shadow 0.2s;
-        }
-        .container:hover {
-            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
-        }
-        h1 {
-            color: #2a2a2a;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 1.6em;
-            letter-spacing: 1px;
-        }
-        form {
+
+        .page-shell {
+            width: min(100%, 520px);
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 22px;
         }
-        label {
-            font-weight: 500;
-            color: #444;
-            margin-bottom: 2px;
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
         }
-        input[type="file"], input[type="text"], textarea {
-            padding: 11px;
-            border: 1px solid #bfc8e6;
-            border-radius: 5px;
-            font-size: 1em;
-            background: #f7f9fc;
-            transition: border 0.2s;
-        }
-        input[type="file"]:focus, input[type="text"]:focus, textarea:focus {
-            border: 1.5px solid #007bff;
-            outline: none;
-        }
-        textarea {
-            resize: vertical;
-            min-height: 60px;
-            max-height: 180px;
-        }
-        button {
-            padding: 13px;
-            background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.08em;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 2px 8px #007bff22;
-            transition: background 0.2s, box-shadow 0.2s;
-        }
-        button:hover {
-            background: linear-gradient(90deg, #0056b3 60%, #007bff 100%);
-            box-shadow: 0 4px 16px #007bff33;
-        }
-        .back-link {
-            display: block;
-            margin: 22px auto 0 auto;
-            text-align: center;
-            color: #007bff;
-            text-decoration: none;
-            font-size: 1em;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .back-link:hover {
-            color: #0056b3;
-            text-decoration: underline;
-        }
-        .logo-btn {
+
+        .brand {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin: 32px auto 0 auto;
-            background: none;
+            gap: 14px;
+        }
+
+        .brand-mark {
+            width: 48px;
+            height: 48px;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--accent), #3b82f6);
+            color: white;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .brand-title {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .header-action {
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: white;
+            color: var(--text);
+            border: 1px solid #d1d5db;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 150ms ease, background 150ms ease;
+        }
+
+        .header-action:hover {
+            transform: translateY(-1px);
+            background: #f8fafc;
+        }
+
+        .upload-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 28px;
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            padding: 34px 30px;
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+        }
+
+        .upload-card h1 {
+            margin: 0 0 16px;
+            font-size: 1.9rem;
+            line-height: 1.1;
+        }
+
+        p.lead {
+            margin: 0 0 26px;
+            color: var(--muted);
+            line-height: 1.75;
+        }
+
+        form {
+            display: grid;
+            gap: 18px;
+        }
+
+        label {
+            color: var(--muted);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: #f8fbff;
+            font-size: 1rem;
+            transition: border-color 150ms ease, box-shadow 150ms ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px 18px;
             border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--accent), #3b82f6);
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: transform 0.15s;
+            box-shadow: 0 16px 30px rgba(79, 70, 229, 0.18);
+            transition: transform 150ms ease, box-shadow 150ms ease;
         }
-        .logo-btn:hover {
-            transform: scale(1.07);
+
+        button:hover {
+            transform: translateY(-1px);
         }
-        .logo-img {
-            width: 54px;
-            height: 54px;
-            margin-right: 12px;
+
+        .back-link {
+            display: inline-flex;
+            justify-content: center;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 0;
         }
-        .logo-text {
-            font-size: 2em;
-            font-weight: bold;
-            color: #1a237e;
-            letter-spacing: 1px;
+
+        .back-link:hover {
+            color: #1d4ed8;
         }
-            .logout-btn {
-        display: inline-block;
-        margin: 18px 0 0 0;
-        padding: 8px 22px;
-        background: #e53935;
-        color: #fff;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 1em;
-        box-shadow: 0 1px 4px #e5393511;
-        transition: background 0.18s;
-    }
-    .logout-btn:hover {
-        background: #b71c1c;
-    }
     </style>
 </head>
 <body>
-    <button class="logo-btn" onclick="window.location.href='/sign-in'">
-        <svg class="logo-img" viewBox="0 0 64 64" fill="none">
-            <circle cx="32" cy="32" r="32" fill="#007bff"/>
-            <path d="M32 18a10 10 0 100 20 10 10 0 000-20zm0 24c-8.84 0-16 4.03-16 9v3h32v-3c0-4.97-7.16-9-16-9z" fill="#fff"/>
-        </svg>
-        <span class="logo-text">MiApp</span>
-    </button>
-    <div style="display:flex; justify-content:flex-end; max-width:420px; margin:0 auto; padding:0 8px;">
-    <a href="/logout" class="logout-btn">Cerrar sesión</a>
-    </div>
-    <div class="container">
-        <h1>Subir un nuevo video</h1>
-        <form method="POST" action="/upload/charge" enctype="multipart/form-data">
-            <label for="video">Archivo de video (.mp4):</label>
-            <input id="video" type="file" name="video" accept="video/mp4" required>
+    <div class="page-shell">
+        <div class="top-bar">
+            <div class="brand">
+                <div class="brand-mark">O</div>
+                <div class="brand-title">Subir video</div>
+            </div>
+            <a class="header-action" href="/logout">Cerrar sesión</a>
+        </div>
 
-            <label for="nombre">Título del video:</label>
-            <input id="nombre" type="text" name="nombre" placeholder="Título del video" required>
-            <button type="submit">Cargar Video</button>
-        </form>
-        <a class="back-link" href="/">← Volver al inicio</a>
+        <section class="upload-card">
+            <h1>Sube tu próximo video</h1>
+            <p class="lead">Selecciona un archivo MP4/Gif y dale un título claro para que puedas encontrarlo rápido en tu galería.</p>
+            <form method="POST" action="/upload/charge" enctype="multipart/form-data">
+                <div>
+                    <label for="video">Archivo de video (.mp4/.gif)</label>
+                    <input id="video" type="file" name="video" accept="video/mp4, video/gif" required>
+                </div>
+                <div>
+                    <label for="nombre">Título del video</label>
+                    <input id="nombre" type="text" name="nombre" placeholder="Ej. Paseo en la ciudad" required>
+                </div>
+                <button type="submit">Cargar video</button>
+            </form>
+            <a class="back-link" href="/galeriaVideos">← Volver a la galería</a>
+        </section>
     </div>
 </body>
 </html>

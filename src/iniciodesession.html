@@ -1,111 +1,160 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Iniciar Sesión</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        :root {
+            --bg: #eef4ff;
+            --surface: #ffffff;
+            --accent: #4f46e5;
+            --accent-soft: #eef2ff;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #dbeafe;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(120deg, #e0e7ff 0%, #f4f4f4 100%);
             margin: 0;
             min-height: 100vh;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+            color: var(--text);
+            display: grid;
+            place-items: center;
+            padding: 24px;
         }
-        .logo {
+
+        .auth-card {
+            width: min(100%, 400px);
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            border-radius: 28px;
+            padding: 34px 30px 28px;
+            box-shadow: 0 24px 50px rgba(15, 23, 42, 0.08);
+        }
+
+        .brand {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin: 40px 0 24px 0;
+            gap: 16px;
+            margin-bottom: 26px;
         }
-        .logo-img {
+
+        .brand-mark {
             width: 54px;
             height: 54px;
-            margin-right: 12px;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--accent), #3b82f6);
+            color: white;
+            font-weight: 800;
+            font-size: 1.2rem;
         }
-        .logo-text {
-            font-size: 2em;
-            font-weight: bold;
-            color: #1a237e;
-            letter-spacing: 1px;
+
+        .brand-title {
+            margin: 0;
+            font-size: 1.3rem;
+            letter-spacing: -0.03em;
         }
-        .login-container {
-            max-width: 350px;
-            margin: 0 auto;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-            padding: 36px 32px 28px 32px;
+
+        .brand-subtitle {
+            margin: 4px 0 0;
+            color: var(--muted);
+            font-size: 0.95rem;
         }
+
         h2 {
-            text-align: center;
-            color: #222;
-            margin-bottom: 28px;
+            margin: 0 0 24px;
+            font-size: 1.65rem;
+            letter-spacing: -0.02em;
         }
+
         form {
-            display: flex;
-            flex-direction: column;
+            display: grid;
             gap: 16px;
         }
-        input[type="text"], input[type="password"] {
-            padding: 10px;
-            border: 1px solid #bfc8e6;
-            border-radius: 5px;
-            font-size: 1em;
-            background: #f7f9fc;
-            transition: border 0.2s;
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: #f8fbff;
+            color: var(--text);
+            font-size: 1rem;
+            transition: border-color 150ms ease, box-shadow 150ms ease;
         }
+
         input:focus {
-            border: 1.5px solid #007bff;
             outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
         }
+
         button {
-            padding: 12px;
-            background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
-            color: #fff;
+            width: 100%;
+            padding: 14px 18px;
             border: none;
-            border-radius: 5px;
-            font-size: 1.08em;
-            font-weight: bold;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent), #3b82f6);
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 2px 8px #007bff22;
-            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 16px 30px rgba(79, 70, 229, 0.18);
+            transition: transform 150ms ease, box-shadow 150ms ease;
         }
+
         button:hover {
-            background: linear-gradient(90deg, #0056b3 60%, #007bff 100%);
-            box-shadow: 0 4px 16px #007bff33;
+            transform: translateY(-1px);
         }
-        .back-link {
-            display: block;
-            margin: 22px auto 0 auto;
-            text-align: center;
-            color: #007bff;
+
+        .link-group {
+            display: grid;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .nav-link {
+            color: var(--accent);
             text-decoration: none;
-            font-size: 1em;
-            font-weight: 500;
-            transition: color 0.2s;
+            text-align: center;
+            font-weight: 600;
         }
-        .back-link:hover {
-            color: #0056b3;
-            text-decoration: underline;
+
+        .nav-link:hover {
+            color: #1d4ed8;
         }
     </style>
 </head>
 <body>
-    <div class="logo">
-        <!-- Puedes cambiar el SVG por tu propio logo o imagen -->
-        <svg class="logo-img" viewBox="0 0 64 64" fill="none">
-            <circle cx="32" cy="32" r="32" fill="#007bff"/>
-            <path d="M32 18a10 10 0 100 20 10 10 0 000-20zm0 24c-8.84 0-16 4.03-16 9v3h32v-3c0-4.97-7.16-9-16-9z" fill="#fff"/>
-        </svg>
-        <span class="logo-text">Iniciar Sesion</span>
-    </div>
-    <div class="login-container">
-        <h2>Iniciar Sesión</h2>
+    <div class="auth-card">
+        <div class="brand">
+            <div class="brand-mark">V</div>
+            <div>
+                <p class="brand-title">Iniciar Sesión</p>
+                <span class="brand-subtitle">Accede a tu galería de videos</span>
+            </div>
+        </div>
+
+        <h2>Bienvenido de nuevo</h2>
         <form method="POST" action="/sign-in">
             <input type="text" name="usuario" placeholder="Usuario" required>
             <input type="password" name="password" placeholder="Contraseña" required>
             <button type="submit">Entrar</button>
         </form>
-        <a class="back-link" href="/galeriaVideos">← Volver al inicio</a>
+
+        <div class="link-group">
+            <a class="nav-link" href="/galeriaVideos">← Volver a la galería</a>
+            <a class="nav-link" href="/register">¿No tienes cuenta? Regístrate</a>
+        </div>
     </div>
 </body>
 </html>

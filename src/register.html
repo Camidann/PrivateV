@@ -1,117 +1,158 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Registrarse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        :root {
+            --bg: #eef4ff;
+            --surface: #ffffff;
+            --accent: #4f46e5;
+            --accent-soft: #eef2ff;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #dbeafe;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(120deg, #e0e7ff 0%, #f4f4f4 100%);
             margin: 0;
             min-height: 100vh;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+            color: var(--text);
+            display: grid;
+            place-items: center;
+            padding: 24px;
         }
-        .logo-btn {
+
+        .auth-card {
+            width: min(100%, 420px);
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 28px;
+            padding: 36px 32px;
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(226, 232, 240, 0.95);
+        }
+
+        .brand {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin: 36px auto 0 auto;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.15s;
+            gap: 16px;
+            margin-bottom: 26px;
         }
-        .logo-btn:hover {
-            transform: scale(1.07);
-        }
-        .logo-img {
+
+        .brand-mark {
             width: 54px;
             height: 54px;
-            margin-right: 12px;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--accent), #3b82f6);
+            color: white;
+            font-weight: 800;
+            font-size: 1.2rem;
         }
-        .logo-text {
-            font-size: 2em;
-            font-weight: bold;
-            color: #1a237e;
-            letter-spacing: 1px;
+
+        .brand-title {
+            margin: 0;
+            font-size: 1.3rem;
         }
-        .register-container {
-            max-width: 370px;
-            margin: 0 auto;
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-            padding: 36px 32px 28px 32px;
+
+        .brand-subtitle {
+            margin: 4px 0 0;
+            color: var(--muted);
+            font-size: 0.95rem;
         }
+
         h2 {
-            text-align: center;
-            color: #222;
-            margin-bottom: 28px;
+            margin: 0 0 24px;
+            font-size: 1.65rem;
+            letter-spacing: -0.02em;
         }
+
         form {
-            display: flex;
-            flex-direction: column;
+            display: grid;
             gap: 16px;
         }
-        input[type="text"], input[type="password"] {
-            padding: 10px;
-            border: 1px solid #bfc8e6;
-            border-radius: 5px;
-            font-size: 1em;
-            background: #f7f9fc;
-            transition: border 0.2s;
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: #f8fbff;
+            color: var(--text);
+            font-size: 1rem;
+            transition: border-color 150ms ease, box-shadow 150ms ease;
         }
+
         input:focus {
-            border: 1.5px solid #007bff;
             outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
         }
+
         button {
-            padding: 12px;
-            background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
-            color: #fff;
+            width: 100%;
+            padding: 14px 18px;
             border: none;
-            border-radius: 5px;
-            font-size: 1.08em;
-            font-weight: bold;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent), #3b82f6);
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 2px 8px #007bff22;
-            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 16px 30px rgba(79, 70, 229, 0.18);
+            transition: transform 150ms ease, box-shadow 150ms ease;
         }
+
         button:hover {
-            background: linear-gradient(90deg, #0056b3 60%, #007bff 100%);
-            box-shadow: 0 4px 16px #007bff33;
+            transform: translateY(-1px);
         }
-        .back-link {
-            display: block;
-            margin: 22px auto 0 auto;
-            text-align: center;
-            color: #007bff;
+
+        .link-group {
+            margin-top: 24px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .nav-link {
+            color: var(--accent);
             text-decoration: none;
-            font-size: 1em;
-            font-weight: 500;
-            transition: color 0.2s;
+            text-align: center;
+            font-weight: 600;
         }
-        .back-link:hover {
-            color: #0056b3;
-            text-decoration: underline;
+
+        .nav-link:hover {
+            color: #1d4ed8;
         }
     </style>
 </head>
 <body>
-    <button class="logo-btn" onclick="window.location.href='/sign-in'">
-        <svg class="logo-img" viewBox="0 0 64 64" fill="none">
-            <circle cx="32" cy="32" r="32" fill="#007bff"/>
-            <path d="M32 18a10 10 0 100 20 10 10 0 000-20zm0 24c-8.84 0-16 4.03-16 9v3h32v-3c0-4.97-7.16-9-16-9z" fill="#fff"/>
-        </svg>
-        <span class="logo-text">Crear Cuenta</span>
-    </button>
-    <div class="register-container">
-        <h2>Crear cuenta</h2>
-    <form method="POST" action="/galeriaVideos">
-    <input type="text" name="usuario" placeholder="Usuario" required>
-    <input type="password" name="password" placeholder="Contraseña" required>
-    <button type="submit">Registrarse</button>
-    </form>
-        <a class="back-link" href="/sign-in">¿Ya tienes cuenta? Inicia sesión</a>
-    </div>  
+    <div class="auth-card">
+        <div class="brand">
+            <div class="brand-mark">C</div>
+            <div>
+                <p class="brand-title">Crear cuenta</p>
+                <span class="brand-subtitle">Únete y empieza a subir videos</span>
+            </div>
+        </div>
+
+        <h2>Regístrate ahora</h2>
+        <form method="POST" action="/register">
+            <input type="text" name="usuario" placeholder="Usuario" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <button type="submit">Registrarse</button>
+        </form>
+
+        <div class="link-group">
+            <a class="nav-link" href="/sign-in">¿Ya tienes cuenta? Inicia sesión</a>
+        </div>
+    </div>
 </body>
 </html>
