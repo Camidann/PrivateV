@@ -6,6 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// crea el path de cada video nuevo
+
 func AuthRequired() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		usuario, err := c.Cookie("usuario")
