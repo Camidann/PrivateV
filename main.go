@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	//Crea el Gin router
+	//Crea el Gin router.
 	initDB()
 	router := gin.Default()
 	fmt.Println("EMPEZO LA CARGA DE LA PAGINA")
