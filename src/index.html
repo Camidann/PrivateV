@@ -2,328 +2,329 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Galería de Videos</title>
+    <title>PrivateV - Tu Galería de Videos Privada</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        :root {
-            --bg: #f8fbff;
-            --surface: #ffffff;
-            --surface-soft: #f3f7ff;
-            --accent: #4f46e5;
-            --accent-strong: #2563eb;
-            --text: #111827;
-            --muted: #6b7280;
-            --border: #e2e8f0;
-            --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
-        }
-
         * {
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             margin: 0;
-            min-height: 100vh;
-            font-family: 'Inter', system-ui, sans-serif;
-            background: radial-gradient(circle at top left, rgba(79, 70, 229, 0.18), transparent 25%),
-                        linear-gradient(180deg, #eef4ff 0%, #f8fbff 100%);
-            color: var(--text);
-            display: flex;
-            justify-content: center;
-            padding: 18px;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0f0f0f;
+            color: #fff;
         }
 
-        .page-shell {
-            width: min(1200px, 100%);
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .site-header {
+        .navbar {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 14px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 16px;
-            padding: 22px 24px;
-            border-radius: 24px;
-            background: rgba(255, 255, 255, 0.88);
-            border: 1px solid rgba(226, 232, 240, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .brand {
+        .brand-logo {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
         }
 
-        .brand-mark {
-            width: 50px;
-            height: 50px;
-            border-radius: 18px;
-            background: linear-gradient(135deg, var(--accent), #3b82f6);
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #ff0000, #cc0000);
+            border-radius: 4px;
             display: grid;
             place-items: center;
-            color: white;
             font-weight: 800;
-            font-size: 1.1rem;
-            box-shadow: 0 16px 30px rgba(79, 70, 229, 0.18);
+            font-size: 1rem;
         }
 
-        .brand-title {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.1;
-        }
-
-        .brand-title strong {
-            font-size: 1.15rem;
-        }
-
-        .brand-subtitle {
-            font-size: 0.93rem;
-            color: var(--muted);
-        }
-
-        .controls {
+        .nav-controls {
             display: flex;
             align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: flex-end;
+            gap: 12px;
         }
 
-        .button,
-        .button-secondary {
-            display: inline-flex;
+        .nav-btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: none;
+            background: #222;
+            color: #fff;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 200ms ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .nav-btn:hover {
+            background: #333;
+        }
+
+        .nav-btn.primary {
+            background: #065fd4;
+        }
+
+        .nav-btn.primary:hover {
+            background: #0d47a1;
+        }
+
+        .container {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .header-section h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+        }
+
+        .upload-btn {
+            padding: 10px 24px;
+            background: #065fd4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 200ms ease;
+            font-size: 0.95rem;
+        }
+
+        .upload-btn:hover {
+            background: #0d47a1;
+            transform: translateY(-2px);
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .video-item {
+            cursor: pointer;
+            transition: all 200ms ease;
+            border-radius: 8px;
+        }
+
+        .video-item:hover {
+            transform: translateY(-4px);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 12px 20px;
-            border-radius: 999px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
-            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            transition: box-shadow 200ms ease;
         }
 
-        .button {
-            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-            color: white;
-            box-shadow: 0 16px 32px rgba(79, 70, 229, 0.18);
-            border: none;
+        .video-item:hover .video-thumbnail {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
         }
 
-        .button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 22px 40px rgba(79, 70, 229, 0.22);
-        }
-
-        .button-secondary {
-            background: white;
-            color: var(--text);
-            border: 1px solid #d1d5db;
-        }
-
-        .button-secondary:hover {
-            background: #f8fafc;
-        }
-
-        .hero-panel {
-            display: grid;
-            gap: 18px;
-            padding: 28px 26px;
-            border-radius: 28px;
-            background: white;
-            border: 1px solid rgba(226, 232, 240, 0.95);
-            box-shadow: var(--shadow);
-        }
-
-        .page-title {
-            font-size: clamp(1.8rem, 2.5vw, 2.7rem);
-            margin: 0;
-            line-height: 1.02;
-        }
-
-        .page-copy {
-            margin: 0;
-            font-size: 1rem;
-            color: var(--muted);
-            line-height: 1.75;
-            max-width: 780px;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-        }
-
-        .video-card {
-            display: flex;
-            flex-direction: column;
-            border-radius: 24px;
-            overflow: hidden;
-            border: 1px solid #e5e7eb;
-            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-            transition: transform 150ms ease, box-shadow 150ms ease;
-        }
-
-        .video-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.1);
-        }
-
-        .video-preview {
-            position: relative;
-            aspect-ratio: 16 / 9;
-            background: #e0e7ff;
-        }
-
-        .video-preview video {
+        .video-thumbnail video {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
 
-        .video-meta {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
+        .play-overlay {
+            position: absolute;
+            width: 56px;
+            height: 56px;
+            background: rgba(6, 95, 212, 0.9);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: all 200ms ease;
+        }
+
+        .video-item:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .video-info {
+            padding: 12px 0;
         }
 
         .video-title {
-            font-size: 1rem;
-            font-weight: 700;
             margin: 0;
-            min-height: 2.6em;
-            color: #111827;
-        }
-
-        .video-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .video-badge {
-            background: #eef2ff;
-            color: #4338ca;
-            border-radius: 999px;
-            padding: 7px 14px;
-            font-size: 0.85rem;
-            font-weight: 700;
-        }
-
-        .watch-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 999px;
-            background: var(--accent);
-            color: white;
-            text-decoration: none;
-            padding: 11px 18px;
-            font-weight: 700;
-            transition: background 150ms ease;
-        }
-
-        .watch-link:hover {
-            background: #4338ca;
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.3;
+            color: #fff;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            word-break: break-word;
         }
 
         .empty-state {
             grid-column: 1 / -1;
-            border-radius: 24px;
-            background: rgba(79, 70, 229, 0.08);
-            padding: 36px 24px;
             text-align: center;
-            color: var(--muted);
+            padding: 80px 24px;
         }
 
-        .empty-state strong {
-            display: block;
-            margin-bottom: 12px;
-            font-size: 1.2rem;
-            color: #111827;
+        .empty-state h2 {
+            font-size: 1.6rem;
+            margin: 0 0 12px 0;
+            font-weight: 500;
         }
 
-        footer {
-            text-align: center;
-            color: var(--muted);
+        .empty-state p {
+            color: #aaa;
+            margin: 0 0 28px 0;
             font-size: 0.95rem;
-            padding-bottom: 10px;
         }
 
-        @media (max-width: 760px) {
-            .site-header {
-                flex-direction: column;
-                align-items: stretch;
+        .empty-state .upload-btn {
+            padding: 12px 28px;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 1200px) {
+            .videos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                padding: 24px 16px;
             }
 
-            .controls {
-                justify-content: flex-start;
+            .header-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                margin-bottom: 32px;
+            }
+
+            .videos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 20px;
+            }
+
+            .header-section h1 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 10px 12px;
+            }
+
+            .container {
+                padding: 16px 12px;
+            }
+
+            .videos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 16px;
+            }
+
+            .header-section h1 {
+                font-size: 1.3rem;
+            }
+
+            .header-section {
+                margin-bottom: 24px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="page-shell">
-        <header class="site-header">
-            <div class="brand">
-                <div class="brand-mark">V</div>
-                <div class="brand-title">
-                    <strong>VideoHub</strong>
-                    <span class="brand-subtitle">Galería clara y elegante</span>
-                </div>
-            </div>
-            <div class="controls">
-                {{ if .logueado }}
-                <a href="/logout" class="button-secondary">Cerrar sesión</a>
-                {{ else }}
-                <a href="/sign-in" class="button">Iniciar sesión</a>
-                {{ end }}
-            </div>
-        </header>
+    <nav class="navbar">
+        <a href="/" class="brand-logo">
+            <div class="logo-icon">P</div>
+            <span>PrivateV</span>
+        </a>
+        <div class="nav-controls">
+            {{ if .logueado }}
+            <a href="/logout" class="nav-btn">Cerrar sesión</a>
+            {{ else }}
+            <a href="/sign-in" class="nav-btn primary">Iniciar sesión</a>
+            {{ end }}
+        </div>
+    </nav>
 
-        <section class="hero-panel">
-            <div>
-                <h1 class="page-title">Tus videos, ahora con un diseño más pulido</h1>
-            </div>
-            <a class="button" href="/upload">➕ Subir video</a>
-        </section>
+    <div class="container">
+        <div class="header-section">
+            <h1>Mi Biblioteca</h1>
+            {{ if .logueado }}
+            <a href="/upload" class="upload-btn">+ Subir</a>
+            {{ end }}
+        </div>
 
-        <section class="card-grid">
-            {{range .videos}}
-            <div class="video-card">
-                <a class="video-preview" href="/video/{{.}}">
-                    <video src="/video-content/{{.}}" preload="metadata" muted></video>
-                </a>
-                <div class="video-meta">
-                    <h2 class="video-title" title="{{.}}">{{.}}</h2>
-                    <div class="video-actions">
-                        <span class="video-badge">MP4</span>
-                        <a class="watch-link" href="/video/{{.}}">Ver video</a>
+        <div class="videos-grid">
+            {{ if .logueado }}
+                {{ range .videos }}
+                <a href="/video/{{.}}" class="video-item" style="text-decoration: none; color: inherit;">
+                    <div class="video-thumbnail">
+                        <video src="/video-content/{{.}}" preload="metadata" muted></video>
+                        <div class="play-overlay">▶</div>
                     </div>
+                    <div class="video-info">
+                        <h3 class="video-title">{{.}}</h3>
+                    </div>
+                </a>
+                {{ end }}
+                
+                {{ if not .videos }}
+                <div class="empty-state">
+                    <h2>Tu biblioteca está vacía</h2>
+                    <p>Sube tu primer video privado para comenzar</p>
+                    <a href="/upload" class="upload-btn">Subir video</a>
                 </div>
-            </div>
-            {{else}}
-            <div class="empty-state">
-                <strong>No hay videos subidos aún.</strong>
-                Sube tu primer archivo para empezar a crear tu biblioteca multimedia.
-            </div>
-            {{end}}
-        </section>
+                {{ end }}
+            {{ else }}
+                <div class="empty-state">
+                    <h2>Inicia sesión para acceder</h2>
+                    <p>Guarda y gestiona tus videos privados de forma segura</p>
+                    <a href="/sign-in" class="upload-btn">Iniciar sesión</a>
+                </div>
+            {{ end }}
+        </div>
     </div>
 </body>
 </html>

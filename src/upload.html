@@ -1,194 +1,355 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Subir Video</title>
+    <title>Subir Video - PrivateV</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        :root {
-            --bg: #eef4ff;
-            --surface: #ffffff;
-            --accent: #4f46e5;
-            --text: #111827;
-            --muted: #6b7280;
-            --border: #dbeafe;
-        }
-
         * {
             box-sizing: border-box;
         }
 
         body {
             margin: 0;
-            min-height: 100vh;
-            font-family: 'Inter', system-ui, sans-serif;
-            background: radial-gradient(circle at top, rgba(79, 70, 229, 0.16), transparent 24%),
-                        linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
-            color: var(--text);
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            color: #fff;
+        }
+
+        .navbar {
+            background: #111;
+            border-bottom: 1px solid #222;
+            padding: 14px 24px;
             display: flex;
-            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #ff0000, #cc0000);
+            border-radius: 4px;
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            font-size: 1rem;
+        }
+
+        .back-btn {
+            padding: 8px 14px;
+            background: transparent;
+            color: #aaa;
+            border: 1px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 200ms ease;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            background: #222;
+            color: #fff;
+            border-color: #444;
+        }
+
+        .upload-container {
+            max-width: 600px;
+            margin: 60px auto;
             padding: 24px;
         }
 
-        .page-shell {
-            width: min(100%, 520px);
+        .upload-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            padding: 40px 32px;
+        }
+
+        .upload-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .upload-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .upload-header p {
+            margin: 0;
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+
+        .upload-form {
             display: flex;
             flex-direction: column;
-            gap: 22px;
+            gap: 24px;
         }
 
-        .top-bar {
+        .form-group {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 14px;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .brand-mark {
-            width: 48px;
-            height: 48px;
-            border-radius: 18px;
-            display: grid;
-            place-items: center;
-            background: linear-gradient(135deg, var(--accent), #3b82f6);
-            color: white;
-            font-weight: 800;
-            font-size: 1.1rem;
-        }
-
-        .brand-title {
-            margin: 0;
-            font-weight: 700;
-            font-size: 1.05rem;
-        }
-
-        .header-action {
-            padding: 10px 18px;
-            border-radius: 999px;
-            background: white;
-            color: var(--text);
-            border: 1px solid #d1d5db;
-            text-decoration: none;
+        .form-group label {
             font-weight: 600;
-            transition: transform 150ms ease, background 150ms ease;
+            font-size: 0.9rem;
+            color: #fff;
         }
 
-        .header-action:hover {
-            transform: translateY(-1px);
-            background: #f8fafc;
-        }
-
-        .upload-card {
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 28px;
-            border: 1px solid rgba(226, 232, 240, 0.95);
-            padding: 34px 30px;
-            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
-        }
-
-        .upload-card h1 {
-            margin: 0 0 16px;
-            font-size: 1.9rem;
-            line-height: 1.1;
-        }
-
-        p.lead {
-            margin: 0 0 26px;
-            color: var(--muted);
-            line-height: 1.75;
-        }
-
-        form {
-            display: grid;
-            gap: 18px;
-        }
-
-        label {
-            color: var(--muted);
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            background: #f8fbff;
+        .form-group input[type="text"],
+        .form-group textarea {
+            padding: 12px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #fff;
             font-size: 1rem;
-            transition: border-color 150ms ease, box-shadow 150ms ease;
+            transition: all 200ms ease;
+            font-family: inherit;
         }
 
-        input:focus {
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus {
             outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
+            border-color: #065fd4;
+            background: #1a1a1a;
+            box-shadow: 0 0 0 2px rgba(6, 95, 212, 0.1);
         }
 
-        button {
-            width: 100%;
-            padding: 14px 18px;
-            border: none;
-            border-radius: 16px;
-            background: linear-gradient(135deg, var(--accent), #3b82f6);
-            color: white;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 16px 30px rgba(79, 70, 229, 0.18);
-            transition: transform 150ms ease, box-shadow 150ms ease;
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
         }
 
-        button:hover {
-            transform: translateY(-1px);
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
         }
 
-        .back-link {
-            display: inline-flex;
+        .file-input-label {
+            display: flex;
+            align-items: center;
             justify-content: center;
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 12px 0;
+            gap: 12px;
+            padding: 32px;
+            background: #1a1a1a;
+            border: 2px dashed #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 200ms ease;
         }
 
-        .back-link:hover {
-            color: #1d4ed8;
+        .file-input-label:hover {
+            border-color: #065fd4;
+            background: #222;
+        }
+
+        .file-input-icon {
+            font-size: 1.8rem;
+        }
+
+        .file-input-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            text-align: left;
+        }
+
+        .file-input-text strong {
+            color: #fff;
+        }
+
+        .file-input-text span {
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+
+        .form-group input[type="file"] {
+            display: none;
+        }
+
+        .file-name {
+            color: #065fd4;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+
+        .submit-btn {
+            padding: 14px;
+            background: #065fd4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 200ms ease;
+        }
+
+        .submit-btn:hover {
+            background: #0d47a1;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            background: #444;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-links {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .form-links a {
+            color: #065fd4;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 200ms ease;
+        }
+
+        .form-links a:hover {
+            color: #0d47a1;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 10px 12px;
+            }
+
+            .upload-container {
+                margin: 40px auto;
+                padding: 16px;
+            }
+
+            .upload-card {
+                padding: 28px 20px;
+            }
+
+            .upload-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .file-input-label {
+                padding: 24px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .file-input-text {
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="page-shell">
-        <div class="top-bar">
-            <div class="brand">
-                <div class="brand-mark">O</div>
-                <div class="brand-title">Subir video</div>
-            </div>
-            <a class="header-action" href="/logout">Cerrar sesión</a>
-        </div>
+    <nav class="navbar">
+        <a href="/" class="brand-logo">
+            <div class="logo-icon">P</div>
+            <span>PrivateV</span>
+        </a>
+        <a href="/galeriaVideos" class="back-btn">Volver</a>
+    </nav>
 
-        <section class="upload-card">
-            <h1>Sube tu próximo video</h1>
-            <p class="lead">Selecciona un archivo MP4/Gif y dale un título claro para que puedas encontrarlo rápido en tu galería.</p>
-            <form method="POST" action="/upload/charge" enctype="multipart/form-data">
-                <div>
-                    <label for="video">Archivo de video (.mp4/.gif)</label>
-                    <input id="video" type="file" name="video" accept="video/mp4, video/gif" required>
+    <div class="upload-container">
+        <div class="upload-card">
+            <div class="upload-header">
+                <h2>Subir Video</h2>
+                <p>Comparte tus videos de forma privada y segura</p>
+            </div>
+
+            <form class="upload-form" method="POST" action="/upload/charge" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" id="titulo" name="titulo" placeholder="Ingresa el título del video" required>
                 </div>
-                <div>
-                    <label for="nombre">Título del video</label>
-                    <input id="nombre" type="text" name="nombre" placeholder="Ej. Paseo en la ciudad" required>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" placeholder="Agregá una descripción (opcional)"></textarea>
                 </div>
-                <button type="submit">Cargar video</button>
+
+                <div class="form-group">
+                    <label>Seleccionar archivo</label>
+                    <div class="file-input-wrapper">
+                        <label for="video" class="file-input-label">
+                            <div class="file-input-icon">📹</div>
+                            <div class="file-input-text">
+                                <strong>Elige un video</strong>
+                                <span>o arrastra el archivo aquí</span>
+                            </div>
+                        </label>
+                        <input type="file" id="video" name="video" accept="video/*" required onchange="updateFileName(this)">
+                    </div>
+                    <div class="file-name" id="file-name"></div>
+                </div>
+
+                <button type="submit" class="submit-btn">Subir Video</button>
             </form>
-            <a class="back-link" href="/galeriaVideos">← Volver a la galería</a>
-        </section>
+
+            <div class="form-links">
+                <a href="/galeriaVideos">← Volver a la biblioteca</a>
+            </div>
+        </div>
     </div>
+
+    <script>
+        function updateFileName(input) {
+            const fileNameDiv = document.getElementById('file-name');
+            if (input.files && input.files[0]) {
+                const fileName = input.files[0].name;
+                const fileSize = (input.files[0].size / 1024 / 1024).toFixed(2);
+                fileNameDiv.textContent = `${fileName} (${fileSize} MB)`;
+            } else {
+                fileNameDiv.textContent = '';
+            }
+        }
+
+        const fileInput = document.getElementById('video');
+        const fileLabel = document.querySelector('.file-input-label');
+
+        fileLabel.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileLabel.style.borderColor = '#065fd4';
+            fileLabel.style.background = '#222';
+        });
+
+        fileLabel.addEventListener('dragleave', () => {
+            fileLabel.style.borderColor = '#333';
+            fileLabel.style.background = '#1a1a1a';
+        });
+
+        fileLabel.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileLabel.style.borderColor = '#333';
+            fileLabel.style.background = '#1a1a1a';
+            if (e.dataTransfer.files) {
+                fileInput.files = e.dataTransfer.files;
+                updateFileName(fileInput);
+            }
+        });
+    </script>
 </body>
 </html>

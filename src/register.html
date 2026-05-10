@@ -1,157 +1,185 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registrarse</title>
+    <title>Crear cuenta - PrivateV</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        :root {
-            --bg: #eef4ff;
-            --surface: #ffffff;
-            --accent: #4f46e5;
-            --accent-soft: #eef2ff;
-            --text: #111827;
-            --muted: #6b7280;
-            --border: #dbeafe;
-        }
-
         * {
             box-sizing: border-box;
         }
 
         body {
             margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             min-height: 100vh;
-            font-family: 'Inter', system-ui, sans-serif;
-            background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
-            color: var(--text);
-            display: grid;
-            place-items: center;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 420px;
             padding: 24px;
         }
 
         .auth-card {
-            width: min(100%, 420px);
-            background: rgba(255, 255, 255, 0.96);
-            border-radius: 28px;
-            padding: 36px 32px;
-            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
-            border: 1px solid rgba(226, 232, 240, 0.95);
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            padding: 40px 32px;
         }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 26px;
+        .brand-section {
+            text-align: center;
+            margin-bottom: 40px;
         }
 
-        .brand-mark {
-            width: 54px;
-            height: 54px;
-            border-radius: 18px;
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #ff0000, #cc0000);
+            border-radius: 6px;
             display: grid;
             place-items: center;
-            background: linear-gradient(135deg, var(--accent), #3b82f6);
-            color: white;
             font-weight: 800;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            margin: 0 auto 16px;
         }
 
-        .brand-title {
+        .brand-section h1 {
+            margin: 0 0 8px 0;
+            font-size: 1.6rem;
+            font-weight: 500;
+        }
+
+        .brand-section p {
             margin: 0;
-            font-size: 1.3rem;
+            color: #aaa;
+            font-size: 0.9rem;
         }
 
-        .brand-subtitle {
-            margin: 4px 0 0;
-            color: var(--muted);
-            font-size: 0.95rem;
-        }
-
-        h2 {
-            margin: 0 0 24px;
-            font-size: 1.65rem;
-            letter-spacing: -0.02em;
-        }
-
-        form {
-            display: grid;
+        .auth-form {
+            display: flex;
+            flex-direction: column;
             gap: 16px;
+            margin-top: 32px;
         }
 
-        input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            background: #f8fbff;
-            color: var(--text);
-            font-size: 1rem;
-            transition: border-color 150ms ease, box-shadow 150ms ease;
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
 
-        input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
-        }
-
-        button {
-            width: 100%;
-            padding: 14px 18px;
-            border: none;
-            border-radius: 14px;
-            background: linear-gradient(135deg, var(--accent), #3b82f6);
-            color: white;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 16px 30px rgba(79, 70, 229, 0.18);
-            transition: transform 150ms ease, box-shadow 150ms ease;
-        }
-
-        button:hover {
-            transform: translateY(-1px);
-        }
-
-        .link-group {
-            margin-top: 24px;
-            display: grid;
-            gap: 10px;
-        }
-
-        .nav-link {
-            color: var(--accent);
-            text-decoration: none;
-            text-align: center;
+        .form-group label {
+            font-size: 0.85rem;
             font-weight: 600;
+            color: #fff;
         }
 
-        .nav-link:hover {
-            color: #1d4ed8;
+        .form-group input {
+            padding: 12px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 200ms ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #065fd4;
+            background: #1a1a1a;
+            box-shadow: 0 0 0 2px rgba(6, 95, 212, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #666;
+        }
+
+        .submit-btn {
+            padding: 12px;
+            background: #065fd4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 200ms ease;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover {
+            background: #0d47a1;
+            transform: translateY(-2px);
+        }
+
+        .auth-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 28px;
+            text-align: center;
+        }
+
+        .auth-link {
+            color: #065fd4;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 200ms ease;
+        }
+
+        .auth-link:hover {
+            color: #0d47a1;
+        }
+
+        @media (max-width: 600px) {
+            .auth-container {
+                padding: 16px;
+            }
+
+            .auth-card {
+                padding: 28px 20px;
+            }
+
+            .brand-section h1 {
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="auth-card">
-        <div class="brand">
-            <div class="brand-mark">C</div>
-            <div>
-                <p class="brand-title">Crear cuenta</p>
-                <span class="brand-subtitle">Únete y empieza a subir videos</span>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="brand-section">
+                <div class="logo-icon">P</div>
+                <h1>PrivateV</h1>
+                <p>Crear una nueva cuenta</p>
             </div>
-        </div>
 
-        <h2>Regístrate ahora</h2>
-        <form method="POST" action="/register">
-            <input type="text" name="usuario" placeholder="Usuario" required>
-            <input type="password" name="password" placeholder="Contraseña" required>
-            <button type="submit">Registrarse</button>
-        </form>
+            <form class="auth-form" method="POST" action="/register">
+                <div class="form-group">
+                    <label for="usuario">Usuario</label>
+                    <input type="text" id="usuario" name="usuario" placeholder="Elige un usuario" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" placeholder="Tu contraseña" required>
+                </div>
+                <button type="submit" class="submit-btn">Crear cuenta</button>
+            </form>
 
-        <div class="link-group">
-            <a class="nav-link" href="/sign-in">¿Ya tienes cuenta? Inicia sesión</a>
+            <div class="auth-links">
+                <a href="/sign-in" class="auth-link">¿Ya tienes cuenta? Inicia sesión</a>
+                <a href="/galeriaVideos" class="auth-link">← Volver</a>
+            </div>
         </div>
     </div>
 </body>
