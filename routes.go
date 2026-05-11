@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"path/filepath"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -14,7 +15,7 @@ import (
 
 func SetupRoutes(router *gin.Engine) {
 
-	router.LoadHTMLFiles("src/logout.html", "src/iniciodesession.html", "src/register.html", "src/index.html", "src/upload.html", "src/video.html")
+	router.LoadHTMLGlob("src/*.html")
 
 	router.GET("/galeriaVideos", func(c *gin.Context) {
 		videos := listVideos()
@@ -97,7 +98,11 @@ func SetupRoutes(router *gin.Engine) {
 			c.String(http.StatusBadRequest, "Debe ingresar un nombre para el video")
 			return
 		}
-		videoFileName := fmt.Sprintf("%s.mp4", nombre)
+		ext := filepath.Ext(file.Filename)
+		if ext == "" {
+			ext = ".mp4"
+		}
+		videoFileName := fmt.Sprintf("%s%s", nombre, ext)
 
 		// Leer el contenido del archivo
 		src, err := file.Open()
@@ -133,21 +138,23 @@ func SetupRoutes(router *gin.Engine) {
 		c.Redirect(http.StatusFound, fmt.Sprintf("/video/%s", videoFileName))
 	})
 
-	router.GET("/video/:filename", func(c *gin.Context) {
+	router.GET("/video/:filename", AuthRequired(), func(c *gin.Context) {
 		filename := c.Param("filename")
 		var titulo, descripcion string
 		err := db.QueryRow("SELECT titulo, descripcion FROM videos WHERE filename = ?",
 			filename).Scan(&titulo, &descripcion)
 		if err != nil {
-			titulo = filename
+			c.String(http.StatusNotFound, "Video no encontrado")
+			return
 		}
 		c.HTML(http.StatusOK, "video.html", gin.H{
 			"video":  "/video-content/" + filename,
 			"titulo": titulo,
 		})
+
 	})
 
-	router.GET("/video-content/:filename", func(c *gin.Context) {
+	router.GET("/video-content/:filename", AuthRequired(), func(c *gin.Context) {
 		filename := c.Param("filename")
 		var contenido []byte
 		err := db.QueryRow("SELECT contenido FROM videos WHERE filename = ?", filename).Scan(&contenido)
@@ -155,8 +162,18 @@ func SetupRoutes(router *gin.Engine) {
 			c.String(http.StatusNotFound, "Video no encontrado")
 			return
 		}
-		c.Header("Content-Type", "video/mp4")
-		c.Data(http.StatusOK, "video/mp4", contenido)
+		ct := contentType(filename)
+		c.Header("Content-Type", ct)
+		c.Data(http.StatusOK, ct, contenido)
 	})
 
+}
+
+func contentType(filename string) string {
+	switch strings.ToLower(filepath.Ext(filename)) {
+	case ".gif":
+		return "image/gif"
+	default:
+		return "video/mp4"
+	}
 }

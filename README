@@ -2,8 +2,3 @@ Cosas que mejoraría / posibles problemas:
 
 Cookies sin Secure flag: En SetCookie tengo false para el parámetro secure.
 Significa que la cookie se manda también por HTTP sin TLS. Si algún día se deploya en producción, eso es un riesgo.
-
-/video-content/:filename es público: Cualquiera puede ver el contenido de un video si sabe el filename, aunque no esté logueado. Quizás eso es intencional (galería pública),
-pero el /video/:filename tampoco tiene auth.
-
-LoadHTMLFiles en vez de LoadHTMLGlob: No es un bug, pero si agrego más páginas tengo que acordarme de agregarlas manualmente ahí.

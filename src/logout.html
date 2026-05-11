@@ -5,108 +5,66 @@
     <title>Sesión cerrada - PrivateV</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: #f8f9fa;
+            color: #1a1a2e;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-        }
-
-        .logout-container {
-            width: 100%;
-            max-width: 420px;
             padding: 24px;
         }
-
-        .logout-card {
-            background: #111;
-            border: 1px solid #222;
-            border-radius: 8px;
-            padding: 48px 32px;
+        .card {
+            width: 100%;
+            max-width: 380px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 48px 36px;
             text-align: center;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            border: 1px solid #e9ecef;
         }
-
-        .logout-icon {
-            width: 64px;
-            height: 64px;
-            background: #065fd4;
+        .icon {
+            width: 56px;
+            height: 56px;
+            background: #6c63ff;
             border-radius: 50%;
             display: grid;
             place-items: center;
-            font-size: 2rem;
-            margin: 0 auto 24px;
+            font-size: 1.5rem;
+            color: #fff;
+            margin: 0 auto 20px;
         }
-
-        .logout-card h2 {
-            margin: 0 0 12px 0;
-            font-size: 1.6rem;
-            font-weight: 500;
-        }
-
-        .logout-card p {
-            margin: 0 0 32px 0;
-            color: #aaa;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .back-btn {
+        .card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+        .card p { color: #6c757d; font-size: 0.95rem; margin-bottom: 28px; line-height: 1.5; }
+        .btn {
             display: inline-block;
             padding: 12px 28px;
-            background: #065fd4;
-            color: white;
+            background: #6c63ff;
+            color: #fff;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 8px;
             font-weight: 600;
+            font-size: 0.9rem;
             transition: all 200ms ease;
             border: none;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-family: inherit;
         }
-
-        .back-btn:hover {
-            background: #0d47a1;
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 600px) {
-            .logout-container {
-                padding: 16px;
-            }
-
-            .logout-card {
-                padding: 32px 24px;
-            }
-
-            .logout-card h2 {
-                font-size: 1.4rem;
-            }
-
-            .logout-icon {
-                width: 56px;
-                height: 56px;
-                font-size: 1.6rem;
-            }
+        .btn:hover { background: #5b52e0; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(108,99,255,0.3); }
+        @media (max-width: 480px) {
+            .card { padding: 36px 24px; }
         }
     </style>
 </head>
 <body>
-    <div class="logout-container">
-        <div class="logout-card">
-            <div class="logout-icon">✓</div>
-            <h2>Sesión cerrada</h2>
-            <p>Has cerrado sesión correctamente. Puedes acceder nuevamente cuando lo necesites.</p>
-            <button class="back-btn" onclick="window.location.href='/galeriaVideos'">Volver a PrivateV</button>
-        </div>
+    <div class="card">
+        <div class="icon">✓</div>
+        <h2>Sesión cerrada</h2>
+        <p>Cerraste sesión correctamente. Nos vemos pronto.</p>
+        <button class="btn" onclick="window.location.href='/galeriaVideos'">Volver a PrivateV</button>
     </div>
 </body>
 </html>
