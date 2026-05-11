@@ -1,0 +1,60 @@
+.player-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px;
+}
+.player-wrapper {
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+.player-wrapper video, .player-wrapper img {
+    width: 100%;
+    display: block;
+    max-height: 70vh;
+}
+.video-info-section { max-width: 900px; }
+.video-header { margin-bottom: 20px; }
+.video-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    word-break: break-word;
+}
+.video-meta { color: #6c757d; font-size: 0.9rem; }
+.actions { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: #6c63ff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 200ms ease;
+}
+.back-link:hover { background: #5b52e0; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(108,99,255,0.3); }
+.delete-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: #e54b4b;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 200ms ease;
+    font-family: inherit;
+}
+.delete-btn:hover { background: #c0392b; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(229,75,75,0.3); }
+@media (max-width: 768px) {
+    .player-container { padding: 16px 12px; }
+    .video-title { font-size: 1.3rem; }
+}

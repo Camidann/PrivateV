@@ -1,0 +1,74 @@
+.upload-container {
+    max-width: 560px;
+    margin: 60px auto;
+    padding: 0 24px;
+}
+.upload-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 36px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    border: 1px solid #e9ecef;
+}
+.upload-header { text-align: center; margin-bottom: 32px; }
+.upload-header h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+.upload-header p { color: #6c757d; font-size: 0.9rem; }
+.upload-form { display: flex; flex-direction: column; gap: 20px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 0.85rem; font-weight: 600; color: #495057; }
+.form-group input[type="text"] {
+    padding: 12px 14px;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    color: #1a1a2e;
+    font-size: 0.95rem;
+    transition: all 200ms ease;
+    font-family: inherit;
+}
+.form-group input[type="text"]:focus {
+    outline: none;
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 3px rgba(108,99,255,0.12);
+    background: #fff;
+}
+.file-drop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 32px;
+    background: #f8f9fa;
+    border: 2px dashed #d0d5dd;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 200ms ease;
+    text-align: center;
+}
+.file-drop:hover { border-color: #6c63ff; background: #f1f0ff; }
+.file-drop-icon { font-size: 2rem; line-height: 1; }
+.file-drop-text strong { display: block; font-size: 0.95rem; color: #1a1a2e; }
+.file-drop-text span { font-size: 0.85rem; color: #6c757d; }
+.form-group input[type="file"] { display: none; }
+.file-name { font-size: 0.85rem; color: #6c63ff; font-weight: 500; text-align: center; }
+.submit-btn {
+    padding: 12px;
+    background: #6c63ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 200ms ease;
+    font-family: inherit;
+}
+.submit-btn:hover { background: #5b52e0; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(108,99,255,0.3); }
+.submit-btn:disabled { background: #adb5bd; cursor: not-allowed; transform: none; box-shadow: none; }
+.form-links { text-align: center; margin-top: 20px; }
+.form-links a { color: #6c757d; text-decoration: none; font-size: 0.9rem; transition: color 200ms ease; }
+.form-links a:hover { color: #1a1a2e; }
+@media (max-width: 600px) {
+    .upload-container { margin: 40px auto; }
+    .upload-card { padding: 28px 20px; }
+}

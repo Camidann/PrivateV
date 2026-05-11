@@ -16,6 +16,7 @@ import (
 func SetupRoutes(router *gin.Engine) {
 
 	router.LoadHTMLGlob("src/*.html")
+	router.Static("/css", "./src/css")
 
 	router.GET("/galeriaVideos", func(c *gin.Context) {
 		videos := listVideos()

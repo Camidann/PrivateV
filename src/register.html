@@ -4,88 +4,13 @@
     <meta charset="UTF-8">
     <title>Crear cuenta - PrivateV</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
-            background: #f8f9fa;
-            color: #1a1a2e;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 24px;
-        }
-        .auth-card {
-            width: 100%;
-            max-width: 400px;
-            background: #fff;
-            border-radius: 16px;
-            padding: 48px 36px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-            border: 1px solid #e9ecef;
-        }
-        .brand-section { text-align: center; margin-bottom: 36px; }
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #6c63ff, #e54b4b);
-            border-radius: 10px;
-            display: grid;
-            place-items: center;
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: #fff;
-            margin: 0 auto 16px;
-        }
-        .brand-section h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
-        .brand-section p { color: #6c757d; font-size: 0.9rem; }
-        .auth-form { display: flex; flex-direction: column; gap: 18px; }
-        .form-group { display: flex; flex-direction: column; gap: 6px; }
-        .form-group label { font-size: 0.85rem; font-weight: 600; color: #495057; }
-        .form-group input {
-            padding: 12px 14px;
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            color: #1a1a2e;
-            font-size: 0.95rem;
-            transition: all 200ms ease;
-            font-family: inherit;
-        }
-        .form-group input:focus {
-            outline: none;
-            border-color: #6c63ff;
-            box-shadow: 0 0 0 3px rgba(108,99,255,0.12);
-            background: #fff;
-        }
-        .form-group input::placeholder { color: #adb5bd; }
-        .submit-btn {
-            padding: 12px;
-            background: #6c63ff;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 200ms ease;
-            margin-top: 4px;
-            font-family: inherit;
-        }
-        .submit-btn:hover { background: #5b52e0; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(108,99,255,0.3); }
-        .auth-links { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; text-align: center; }
-        .auth-link { color: #6c63ff; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 200ms ease; }
-        .auth-link:hover { color: #5b52e0; }
-        @media (max-width: 480px) {
-            .auth-card { padding: 36px 24px; }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/auth.css">
 </head>
 <body>
     <div class="auth-card">
         <div class="brand-section">
-            <div class="logo-icon">P</div>
+            <div class="logo-icon" style="margin:0 auto 16px;">P</div>
             <h1>PrivateV</h1>
             <p>Creá tu cuenta gratis</p>
         </div>
