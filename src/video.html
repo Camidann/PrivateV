@@ -81,6 +81,7 @@
             word-break: break-word;
         }
         .video-meta { color: #6c757d; font-size: 0.9rem; }
+        .actions { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -92,9 +93,23 @@
             font-weight: 600;
             font-size: 0.9rem;
             transition: all 200ms ease;
-            margin-top: 16px;
         }
         .back-link:hover { background: #5b52e0; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(108,99,255,0.3); }
+        .delete-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: #e54b4b;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 200ms ease;
+            font-family: inherit;
+        }
+        .delete-btn:hover { background: #c0392b; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(229,75,75,0.3); }
         @media (max-width: 768px) {
             .navbar { padding: 12px 16px; }
             .player-container { padding: 16px 12px; }
@@ -126,9 +141,13 @@
             <div class="video-header">
                 <h1 class="video-title">{{.titulo}}</h1>
             </div>
-            <a href="/galeriaVideos" class="back-link">← Biblioteca</a>
+            <div class="actions">
+                <a href="/galeriaVideos" class="back-link">← Biblioteca</a>
+                <form method="POST" action="/video/{{.filename}}/delete" onsubmit="return confirm('¿Eliminar este video permanentemente?')" style="display:inline">
+                    <button type="submit" class="delete-btn">Eliminar</button>
+                </form>
+            </div>
         </div>
     </div>
-    
 </body>
 </html>

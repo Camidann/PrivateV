@@ -144,14 +144,23 @@ func SetupRoutes(router *gin.Engine) {
 		err := db.QueryRow("SELECT titulo, descripcion FROM videos WHERE filename = ?",
 			filename).Scan(&titulo, &descripcion)
 		if err != nil {
-			c.String(http.StatusNotFound, "Video no encontrado")
-			return
+
 		}
 		c.HTML(http.StatusOK, "video.html", gin.H{
-			"video":  "/video-content/" + filename,
-			"titulo": titulo,
+			"video":   "/video-content/" + filename,
+			"titulo":  titulo,
+			"esVideo": contentType(filename) != "image/gif",
 		})
+	})
 
+	router.POST("/video/:filename/delete", AuthRequired(), func(c *gin.Context) {
+		filename := c.Param("filename")
+		_, err := db.Exec("DELETE FROM videos WHERE filename = ?", filename)
+		if err != nil {
+			c.String(http.StatusInternalServerError, "No se pudo eliminar")
+			return
+		}
+		c.Redirect(http.StatusFound, "/galeriaVideos")
 	})
 
 	router.GET("/video-content/:filename", AuthRequired(), func(c *gin.Context) {

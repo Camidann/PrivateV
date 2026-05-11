@@ -2,3 +2,5 @@ Cosas que mejoraría / posibles problemas:
 
 Cookies sin Secure flag: En SetCookie tengo false para el parámetro secure.
 Significa que la cookie se manda también por HTTP sin TLS. Si algún día se deploya en producción, eso es un riesgo.
+
+ELIMINAR VIDEO NO FUNCIONA.
