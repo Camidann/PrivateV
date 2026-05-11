@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sesión cerrada - PrivateV</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: #f8f9fa;
+            color: #1a1a2e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+        .card {
+            width: 100%;
+            max-width: 380px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 48px 36px;
+            text-align: center;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            border: 1px solid #e9ecef;
+        }
+        .icon {
+            width: 56px;
+            height: 56px;
+            background: #6c63ff;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 1.5rem;
+            color: #fff;
+            margin: 0 auto 20px;
+        }
+        .card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+        .card p { color: #6c757d; font-size: 0.95rem; margin-bottom: 28px; line-height: 1.5; }
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: #6c63ff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 200ms ease;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .btn:hover { background: #5b52e0; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(108,99,255,0.3); }
+        @media (max-width: 480px) {
+            .card { padding: 36px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">✓</div>
+        <h2>Sesión cerrada</h2>
+        <p>Cerraste sesión correctamente. Nos vemos pronto.</p>
+        <button class="btn" onclick="window.location.href='/galeriaVideos'">Volver a PrivateV</button>
+    </div>
+</body>
+</html>

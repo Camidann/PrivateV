@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{.titulo}} - PrivateV</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: #f8f9fa;
+            color: #1a1a2e;
+        }
+        .navbar {
+            background: #fff;
+            border-bottom: 1px solid #e9ecef;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #1a1a2e;
+            font-weight: 700;
+            font-size: 1.15rem;
+        }
+        .logo-icon {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, #6c63ff, #e54b4b);
+            border-radius: 6px;
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: #fff;
+        }
+        .back-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            background: #fff;
+            color: #1a1a2e;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 200ms ease;
+        }
+        .back-btn:hover { background: #f1f3f5; border-color: #d0d5dd; }
+        .player-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        .player-wrapper {
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        .player-wrapper video {
+            width: 100%;
+            display: block;
+            max-height: 70vh;
+        }
+        .video-info-section { max-width: 900px; }
+        .video-header { margin-bottom: 20px; }
+        .video-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 6px;
+            word-break: break-word;
+        }
+        .video-meta { color: #6c757d; font-size: 0.9rem; }
+        .actions { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: #6c63ff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 200ms ease;
+        }
+        .back-link:hover { background: #5b52e0; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(108,99,255,0.3); }
+        .delete-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: #e54b4b;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 200ms ease;
+            font-family: inherit;
+        }
+        .delete-btn:hover { background: #c0392b; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(229,75,75,0.3); }
+        @media (max-width: 768px) {
+            .navbar { padding: 12px 16px; }
+            .player-container { padding: 16px 12px; }
+            .video-title { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar">
+        <a href="/" class="brand-logo">
+            <div class="logo-icon">P</div>
+            <span>PrivateV</span>
+        </a>
+        <a href="/galeriaVideos" class="back-btn">Volver</a>
+    </nav>
+    <div class="player-container">
+        <div class="player-wrapper">
+            {{ if .esVideo }}
+            <video controls>
+                <source src="{{.video}}" type="video/mp4">
+                Tu navegador no soporta video.
+            </video>
+            {{ else }}
+            <img src="{{.video}}" alt="{{.titulo}}" style="width:100%;display:block;">
+            {{ end }}
+        </div>
+        <div class="video-info-section">
+            <div class="video-header">
+                <h1 class="video-title">{{.titulo}}</h1>
+            </div>
+            <div class="actions">
+                <a href="/galeriaVideos" class="back-link">← Biblioteca</a>
+                <form method="POST" action="/video/{{.filename}}/delete" onsubmit="return confirm('¿Eliminar este video permanentemente?')" style="display:inline">
+                    <button type="submit" class="delete-btn">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
