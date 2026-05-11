@@ -6,6 +6,7 @@ require (
 	github.com/gin-gonic/gin v1.10.1
 	golang.org/x/crypto v0.38.0
 	modernc.org/sqlite v1.37.1
+	github.com/google/go-cmp v0.6.0
 )
 
 require (

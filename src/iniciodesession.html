@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/auth.css">
 </head>
 <body>
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" style="position:fixed;top:20px;right:20px;z-index:999;width:40px;height:40px;font-size:1.3rem;">🌙</button>
     <div class="auth-card">
         <div class="brand-section">
             <div class="logo-icon" style="margin:0 auto 16px;">P</div>
@@ -27,8 +28,25 @@
         </form>
         <div class="auth-links">
             <a href="/register" class="auth-link">¿No tenés cuenta? Registrate</a>
-            <a href="/galeriaVideos" class="auth-link" style="color:#6c757d;">← Volver</a>
+            <a href="/galeriaVideos" class="auth-link" style="color:var(--text-muted);">← Volver</a>
         </div>
     </div>
+    <script>
+        (function() {
+            const key = 'pv-theme';
+            const btn = document.getElementById('themeToggle');
+            function setTheme(t) {
+                document.documentElement.setAttribute('data-theme', t);
+                localStorage.setItem(key, t);
+                if (btn) btn.textContent = t === 'dark' ? '☀️' : '🌙';
+            }
+            const saved = localStorage.getItem(key) || 'light';
+            setTheme(saved);
+            if (btn) btn.addEventListener('click', () => {
+                const cur = document.documentElement.getAttribute('data-theme');
+                setTheme(cur === 'dark' ? 'light' : 'dark');
+            });
+        })();
+    </script>
 </body>
 </html>

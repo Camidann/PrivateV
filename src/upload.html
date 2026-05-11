@@ -13,7 +13,10 @@
             <div class="logo-icon">P</div>
             <span>PrivateV</span>
         </a>
-        <a href="/galeriaVideos" class="back-btn">Volver</a>
+        <div class="nav-right">
+            <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">🌙</button>
+            <a href="/galeriaVideos" class="back-btn">Volver</a>
+        </div>
     </nav>
     <div class="upload-container">
         <div class="upload-card">
@@ -56,14 +59,28 @@
         }
         const fi = document.getElementById('video');
         const fd = document.querySelector('.file-drop');
-        fd.addEventListener('dragover', e => { e.preventDefault(); fd.style.borderColor = '#6c63ff'; fd.style.background = '#f1f0ff'; });
-        fd.addEventListener('dragleave', () => { fd.style.borderColor = '#d0d5dd'; fd.style.background = '#f8f9fa'; });
+        fd.addEventListener('dragover', e => { e.preventDefault(); fd.style.borderColor = 'var(--primary)'; fd.style.background = 'rgba(108,99,255,0.05)'; });
+        fd.addEventListener('dragleave', () => { fd.style.borderColor = ''; fd.style.background = ''; });
         fd.addEventListener('drop', e => {
             e.preventDefault();
-            fd.style.borderColor = '#d0d5dd';
-            fd.style.background = '#f8f9fa';
+            fd.style.borderColor = ''; fd.style.background = '';
             if (e.dataTransfer.files) { fi.files = e.dataTransfer.files; updateFileName(fi); }
         });
+        (function() {
+            const key = 'pv-theme';
+            const btn = document.getElementById('themeToggle');
+            function setTheme(t) {
+                document.documentElement.setAttribute('data-theme', t);
+                localStorage.setItem(key, t);
+                if (btn) btn.textContent = t === 'dark' ? '☀️' : '🌙';
+            }
+            const saved = localStorage.getItem(key) || 'light';
+            setTheme(saved);
+            if (btn) btn.addEventListener('click', () => {
+                const cur = document.documentElement.getAttribute('data-theme');
+                setTheme(cur === 'dark' ? 'light' : 'dark');
+            });
+        })();
     </script>
 </body>
 </html>

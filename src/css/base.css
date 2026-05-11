@@ -1,12 +1,63 @@
+:root {
+    --bg: #f8f9fa;
+    --bg-card: #fff;
+    --bg-nav: #fff;
+    --bg-input: #f8f9fa;
+    --text: #1a1a2e;
+    --text-muted: #6c757d;
+    --border: #e9ecef;
+    --border-hover: #d0d5dd;
+    --primary: #6c63ff;
+    --primary-hover: #5b52e0;
+    --danger: #e54b4b;
+    --danger-hover: #c0392b;
+    --shadow: 0 4px 24px rgba(0,0,0,0.06);
+    --shadow-hover: 0 12px 32px rgba(0,0,0,0.08);
+    --overlay: rgba(0,0,0,0.15);
+}
+
+[data-theme="dark"] {
+    --bg: #0f0f0f;
+    --bg-card: #1a1a1a;
+    --bg-nav: #111;
+    --bg-input: #1a1a1a;
+    --text: #f0f0f0;
+    --text-muted: #888;
+    --border: #2a2a2a;
+    --border-hover: #444;
+    --primary: #7c73ff;
+    --primary-hover: #948cff;
+    --danger: #ff5e5e;
+    --danger-hover: #ff7777;
+    --shadow: 0 4px 24px rgba(0,0,0,0.4);
+    --shadow-hover: 0 12px 32px rgba(0,0,0,0.6);
+    --overlay: rgba(0,0,0,0.4);
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
-    background: #f8f9fa;
-    color: #1a1a2e;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s ease, color 0.3s ease;
 }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .navbar {
-    background: #fff;
-    border-bottom: 1px solid #e9ecef;
+    background: var(--bg-nav);
+    border-bottom: 1px solid var(--border);
     padding: 16px 32px;
     display: flex;
     align-items: center;
@@ -14,20 +65,23 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    animation: slideDown 0.4s ease;
 }
 .brand-logo {
     display: flex;
     align-items: center;
     gap: 10px;
     text-decoration: none;
-    color: #1a1a2e;
+    color: var(--text);
     font-weight: 700;
     font-size: 1.15rem;
+    transition: color 0.3s ease;
 }
 .logo-icon {
     width: 34px;
     height: 34px;
-    background: linear-gradient(135deg, #6c63ff, #e54b4b);
+    background: linear-gradient(135deg, var(--primary), var(--danger));
     border-radius: 6px;
     display: grid;
     place-items: center;
@@ -38,34 +92,51 @@ body {
 .nav-btn {
     padding: 8px 18px;
     border-radius: 8px;
-    border: 1px solid #e9ecef;
-    background: #fff;
-    color: #1a1a2e;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text);
     font-weight: 500;
     cursor: pointer;
     transition: all 200ms ease;
     text-decoration: none;
     font-size: 0.9rem;
 }
-.nav-btn:hover { background: #f1f3f5; border-color: #d0d5dd; }
+.nav-btn:hover { background: var(--bg-input); border-color: var(--border-hover); }
 .nav-btn.primary {
-    background: #6c63ff;
-    border-color: #6c63ff;
+    background: var(--primary);
+    border-color: var(--primary);
     color: #fff;
 }
-.nav-btn.primary:hover { background: #5b52e0; }
+.nav-btn.primary:hover { background: var(--primary-hover); }
 .back-btn {
     padding: 8px 16px;
     border-radius: 8px;
-    border: 1px solid #e9ecef;
-    background: #fff;
-    color: #1a1a2e;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text);
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
     transition: all 200ms ease;
 }
-.back-btn:hover { background: #f1f3f5; border-color: #d0d5dd; }
+.back-btn:hover { background: var(--bg-input); border-color: var(--border-hover); }
+
+.theme-toggle {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    font-size: 1.1rem;
+    transition: all 200ms ease;
+    margin-right: 8px;
+}
+.theme-toggle:hover { background: var(--bg-input); border-color: var(--border-hover); }
+.nav-right { display: flex; align-items: center; gap: 8px; }
+
 @media (max-width: 768px) {
     .navbar { padding: 12px 16px; }
 }

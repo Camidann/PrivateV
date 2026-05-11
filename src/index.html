@@ -13,7 +13,8 @@
             <div class="logo-icon">P</div>
             <span>PrivateV</span>
         </a>
-        <div>
+        <div class="nav-right">
+            <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">🌙</button>
             {{ if .logueado }}
             <a href="/logout" class="nav-btn">Cerrar sesión</a>
             {{ else }}
@@ -29,7 +30,7 @@
         <div class="videos-grid">
             {{ if .logueado }}
                 {{ range .videos }}
-                <a href="/video/{{.FileName}}" class="video-item">
+                <a href="/video/{{.FileName}}" class="video-item" >
                     <div class="video-thumbnail">
                         {{ if .IsVideo }}
                         <video src="/video-content/{{.FileName}}" preload="metadata" muted></video>
@@ -59,5 +60,22 @@
             {{ end }}
         </div>
     </div>
+    <script>
+        (function() {
+            const key = 'pv-theme';
+            const btn = document.getElementById('themeToggle');
+            function setTheme(t) {
+                document.documentElement.setAttribute('data-theme', t);
+                localStorage.setItem(key, t);
+                if (btn) btn.textContent = t === 'dark' ? '☀️' : '🌙';
+            }
+            const saved = localStorage.getItem(key) || 'light';
+            setTheme(saved);
+            if (btn) btn.addEventListener('click', () => {
+                const cur = document.documentElement.getAttribute('data-theme');
+                setTheme(cur === 'dark' ? 'light' : 'dark');
+            });
+        })();
+    </script>
 </body>
 </html>
