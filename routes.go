@@ -140,16 +140,17 @@ func SetupRoutes(router *gin.Engine) {
 
 	router.GET("/video/:filename", AuthRequired(), func(c *gin.Context) {
 		filename := c.Param("filename")
-		var titulo, descripcion string
-		err := db.QueryRow("SELECT titulo, descripcion FROM videos WHERE filename = ?",
-			filename).Scan(&titulo, &descripcion)
+		var titulo string
+		err := db.QueryRow("SELECT titulo FROM videos WHERE filename = ?",
+			filename).Scan(&titulo)
 		if err != nil {
-
+			titulo = filename
 		}
 		c.HTML(http.StatusOK, "video.html", gin.H{
-			"video":   "/video-content/" + filename,
-			"titulo":  titulo,
-			"esVideo": contentType(filename) != "image/gif",
+			"video":    "/video-content/" + filename,
+			"titulo":   titulo,
+			"filename": filename,
+			"esVideo":  contentType(filename) != "image/gif",
 		})
 	})
 
@@ -157,7 +158,7 @@ func SetupRoutes(router *gin.Engine) {
 		filename := c.Param("filename")
 		_, err := db.Exec("DELETE FROM videos WHERE filename = ?", filename)
 		if err != nil {
-			c.String(http.StatusInternalServerError, "No se pudo eliminar")
+			fmt.Println("Error al eliminar video:", err)
 			return
 		}
 		c.Redirect(http.StatusFound, "/galeriaVideos")
@@ -180,6 +181,8 @@ func SetupRoutes(router *gin.Engine) {
 
 func contentType(filename string) string {
 	switch strings.ToLower(filepath.Ext(filename)) {
+	case ".mp3":
+		return "audio/mpeg"
 	case ".gif":
 		return "image/gif"
 	default:
