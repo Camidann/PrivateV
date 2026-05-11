@@ -1,0 +1,13 @@
+# Database
+videos.db
+videos.db.sqbpro
+
+# Compiled binary
+*.exe
+
+# Old videos directory
+Videos/
+
+# OS files
+Thumbs.db
+.DS_Store
