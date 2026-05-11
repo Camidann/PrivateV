@@ -7,6 +7,7 @@ import (
 )
 
 // crea el path de cada video nuevo
+// Amo esta funcion.
 
 func AuthRequired() gin.HandlerFunc {
 	return func(c *gin.Context) {
