@@ -1,6 +1,3 @@
-//Cuando empece este codigo, solo dios y yo sabian que tenia dentro.
-//Ahora ninguno de los dos sabemos que mierda dice ni 1/4 del choclo este//
-
 package main
 
 import (
@@ -15,11 +12,8 @@ import (
 
 // seleciona las rutas http
 
-//NO TOCAR NADA, FUNCIONA POR ARTE DE MAGIA, SI TOCAS ALGO SE ROMPE TODO, NO ME HAGAS SUFRIR MAS POR FAVOR
-
 func SetupRoutes(router *gin.Engine) {
-	// Quitar Static ya que ahora servimos desde DB
-	// router.Static("/Videos", "./Videos")
+
 	router.LoadHTMLFiles("src/logout.html", "src/iniciodesession.html", "src/register.html", "src/index.html", "src/upload.html", "src/video.html")
 
 	router.GET("/galeriaVideos", func(c *gin.Context) {
